@@ -5,7 +5,12 @@ using UnityEngine;
 public class PlayerPosition : MonoBehaviour
 {
     float playerPosX;
+    List<GameObject> minions;
     // Update is called once per frame
+    private void Start()
+    {
+        this.minions = new List<GameObject>();
+    }
     void Update()
     {
         this.playerPosX = this.transform.position.x;
@@ -27,6 +32,14 @@ public class PlayerPosition : MonoBehaviour
     void Spawn()
     {
         Debug.Log("Spawn");
+
+        if (this.minions.Count >= 7)
+        {
+            return;
+        }
+        int index = this.minions.Count + 1;
+        GameObject minion = new GameObject("Minion#" +index);
+        this.minions.Add(minion);
     }
 
     void NotSpawn()
