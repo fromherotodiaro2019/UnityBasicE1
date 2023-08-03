@@ -6,6 +6,7 @@ public class PlayerPosition : MonoBehaviour
 {
     float playerPosX;
     List<GameObject> minions;
+    public GameObject minionPrefab;
     // Update is called once per frame
     private void Start()
     {
@@ -38,7 +39,9 @@ public class PlayerPosition : MonoBehaviour
             return;
         }
         int index = this.minions.Count + 1;
-        GameObject minion = new GameObject("Minion#" +index);
+        GameObject minion = Instantiate(this.minionPrefab);
+        minion.name = "MinionPrefab" + index;
+        minion.transform.position = transform.position;
         this.minions.Add(minion);
     }
 
