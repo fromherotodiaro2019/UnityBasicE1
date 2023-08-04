@@ -27,6 +27,8 @@ public class PlayerPosition : MonoBehaviour
             this.NotSpawn();
         }
 
+        CheckMinionDead();
+
     }
 
 
@@ -42,7 +44,18 @@ public class PlayerPosition : MonoBehaviour
         GameObject minion = Instantiate(this.minionPrefab);
         minion.name = "MinionPrefab" + index;
         minion.transform.position = transform.position;
+        minion.gameObject.SetActive(true);
         this.minions.Add(minion);
+    }
+
+    void CheckMinionDead()
+    {
+        GameObject minion;
+        for (int i = 0; i < this.minions.Count; i++)
+        {
+            minion = this.minions[i];
+            if(minion == null)  this.minions.RemoveAt(i);
+        }
     }
 
     void NotSpawn()
