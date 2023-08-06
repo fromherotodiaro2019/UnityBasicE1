@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class SelfDeytroy : MonoBehaviour
 {
-    // Start is called before the first frame update
+    
     void Start()
     {
-        Invoke("Destroy", 2f);
+        Invoke("Destroy", 12f);
     }
 
     void Destroy( )

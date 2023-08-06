@@ -4,28 +4,19 @@ using UnityEngine;
 
 public class PlayerPosition : MonoBehaviour
 {
-    float playerPosX;
+    
     List<GameObject> minions;
     public GameObject minionPrefab;
-    // Update is called once per frame
+    protected float spawnTimer = 0f;
+    protected float spawnDelay = 1f;
+   
     private void Start()
     {
         this.minions = new List<GameObject>();
     }
     void Update()
     {
-        this.playerPosX = this.transform.position.x;
-
-        int spawnLocation = 7;
-
-        if (this.playerPosX >= spawnLocation)
-        {
-            this.Spawn();
-        }
-        else
-        {
-            this.NotSpawn();
-        }
+        this.Spawn();
 
         CheckMinionDead();
 
@@ -34,15 +25,25 @@ public class PlayerPosition : MonoBehaviour
 
     void Spawn()
     {
-        Debug.Log("Spawn");
+        // Giai thuat tao delay
+        //this.spawntimer = time.deltatime;
+        //if (this.spawntimer < spawndelay) return;
+        //this.spawntimer = 0;
 
+        this.spawnTimer += Time.deltaTime;
+        if (this.spawnTimer < spawnDelay)
+        { 
+            return;
+        } 
+        this.spawnTimer = 0;
+        //---------------------------------------
         if (this.minions.Count >= 7)
         {
             return;
         }
         int index = this.minions.Count + 1;
         GameObject minion = Instantiate(this.minionPrefab);
-        minion.name = "MinionPrefab" + index;
+        minion.name = "Boom" + index;
         minion.transform.position = transform.position;
         minion.gameObject.SetActive(true);
         this.minions.Add(minion);
@@ -54,13 +55,7 @@ public class PlayerPosition : MonoBehaviour
         for (int i = 0; i < this.minions.Count; i++)
         {
             minion = this.minions[i];
-            if(minion == null)  this.minions.RemoveAt(i);
+            if (minion == null) this.minions.RemoveAt(i);
         }
     }
-
-    void NotSpawn()
-    {
-        Debug.Log("Not Spawn");
-    }
-
 }
