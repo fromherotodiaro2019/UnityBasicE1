@@ -5,6 +5,8 @@ using UnityEngine;
 public class FollowPlayer : MonoBehaviour
 {
     public Transform player;
+    protected float speed = 7f;
+    protected float disLimit = 0.5f;// Khoang cach emeni voi main
     void Start()
     {
         
@@ -19,11 +21,11 @@ public class FollowPlayer : MonoBehaviour
     void Follow()
     {
         Vector3 distance = this.player.position - transform.position;
-        if (distance.magnitude >= 3)
+        if (distance.magnitude >= this.disLimit)
         {
-            Vector3 targetPoint = this.player.position - distance.normalized * 3;
+            Vector3 targetPoint = this.player.position - distance.normalized * this.disLimit;
 
-            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position,targetPoint, 15 * Time.deltaTime);
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position,targetPoint, this.speed * Time.deltaTime);
         }
     }
 }
