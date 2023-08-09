@@ -16,6 +16,9 @@ public class DamageSender : MonoBehaviour
     {
         DamageReceiver damageReveive = collision.GetComponent<DamageReceiver>();
         damageReveive.Receiver(1);
+
+        this.enemyCtrl.despawner.Despawn();
+
         Debug.Log(collision.name);
     }
 }
