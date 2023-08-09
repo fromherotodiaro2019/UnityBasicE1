@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class DamageSender : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // [SerializeField]
+    protected EnemyCtrl enemyCtrl;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        this.enemyCtrl = GetComponent<EnemyCtrl>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
